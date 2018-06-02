@@ -1,0 +1,71 @@
+{
+  "variables": {
+    "source_version": "{{env `CODEBUILD_SOURCE_VERSION`}}"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "us-east-1",
+      "source_ami_filter": {
+        "filters": {
+          "virtualization-type": "hvm",
+          "name": "ubuntu/images/*ubuntu-xenial-16.04-amd64-server-*",
+          "root-device-type": "ebs"
+        },
+        "owners": [
+          "099720109477"
+        ],
+        "most_recent": true
+      },
+      "instance_type": "t2.micro",
+      "ssh_username": "ubuntu",
+      "ami_name": "cludden-tf-prometheus-{{user `source_version`}}",
+      "snapshot_tags": {
+        "Name": "cludden-tf-prometheus--{{user `source_version`}}"
+      },
+      "tags": {
+        "Name": "cludden-tf-prometheus--{{user `source_version`}}"
+      },
+      "launch_block_device_mappings": [
+        {
+          "device_name": "/dev/sda1",
+          "volume_size": 100,
+          "volume_type": "gp2",
+          "delete_on_termination": true
+        }
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "node_exporter.service",
+      "destination": "/home/ubuntu/node_exporter.service"
+    },
+    {
+      "type": "file",
+      "source": "prometheus.service",
+      "destination": "/home/ubuntu/prometheus.service"
+    },
+    {
+      "type": "file",
+      "source": "setup.sh",
+      "destination": "/home/ubuntu/setup.sh"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "sudo mv /home/ubuntu/node_exporter.service /etc/systemd/system/",
+        "sudo mv /home/ubuntu/prometheus.service /etc/systemd/system/",
+        "sudo bash /home/ubuntu/setup.sh"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "manifest",
+      "output": "manifest.json",
+      "strip_path": true
+    }
+  ]
+}
