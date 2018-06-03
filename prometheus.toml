@@ -1,0 +1,6 @@
+[template]
+src = "prometheus.yml.tmpl"
+dest = "/etc/prometheus/prometheus.yml"
+keys = [
+  "/"
+]

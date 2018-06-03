@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export PROMETHEUS_VERSION="2.2.1"
-export CONFD_VERSION=
+export CONFD_VERSION="0.16.0"
 export NODEX_VERSION="0.16.0"
 
 # run updates
@@ -59,9 +59,9 @@ systemctl enable node_exporter.service
 
 # Install confd
 echo "installing confd..."
-wget -O ~/confd "https://github.com/kelseyhightower/confd/releases/download/v$CONFD_VERSION/confd-$CONFD_VERSION-darwin-amd64"
-mv /home/app/confd /usr/local/bin/confd
-chmod +x /usr/local/bin/confd
+wget -O ~/confd "https://github.com/kelseyhightower/confd/releases/download/v$CONFD_VERSION/confd-$CONFD_VERSION-linux-amd64"
+mv ~/confd /usr/local/bin/confd
+chmod a+x /usr/local/bin/confd
 
 # cleanup
 echo "cleanup..."

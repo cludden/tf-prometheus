@@ -19,12 +19,12 @@
       },
       "instance_type": "t2.micro",
       "ssh_username": "ubuntu",
-      "ami_name": "cludden-tf-prometheus-{{user `source_version`}}",
+      "ami_name": "prometheus-{{user `source_version`}}",
       "snapshot_tags": {
-        "Name": "cludden-tf-prometheus--{{user `source_version`}}"
+        "Name": "prometheus--{{user `source_version`}}"
       },
       "tags": {
-        "Name": "cludden-tf-prometheus--{{user `source_version`}}"
+        "Name": "prometheus--{{user `source_version`}}"
       },
       "launch_block_device_mappings": [
         {
@@ -49,14 +49,34 @@
     },
     {
       "type": "file",
+      "source": "prometheus.toml",
+      "destination": "/home/ubuntu/prometheus.toml"
+    },
+    {
+      "type": "file",
+      "source": "prometheus.yml.tmpl",
+      "destination": "/home/ubuntu/prometheus.yml.tmpl"
+    },
+    {
+      "type": "file",
       "source": "setup.sh",
       "destination": "/home/ubuntu/setup.sh"
+    },
+    {
+      "type": "file",
+      "source": "confd.sh",
+      "destination": "/home/ubuntu/confd.sh"
     },
     {
       "type": "shell",
       "inline": [
         "sudo mv /home/ubuntu/node_exporter.service /etc/systemd/system/",
         "sudo mv /home/ubuntu/prometheus.service /etc/systemd/system/",
+        "sudo mkdir -p /etc/confd/conf.d",
+        "sudo mkdir -p /etc/confd/templates",
+        "sudo mv /home/ubuntu/prometheus.toml /etc/confd/conf.d/",
+        "sudo mv /home/ubuntu/prometheus.yml.tmpl /etc/confd/templates/",
+        "sudo chmod a+x /home/ubuntu/confd.sh",
         "sudo bash /home/ubuntu/setup.sh"
       ]
     }

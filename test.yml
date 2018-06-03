@@ -1,9 +1,0 @@
-
-/global/scrape_interval: "15s"
-
-/scrape_configs/prometheus/scrape_interval: "5s"
-/scrape_configs/prometheus/static_configs/9100/targets: "[\"localhost:9100\"]"
-/scrape_configs/prometheus/static_configs/9100/labels/foo: "bar"
-
-/scrape_configs/mm_account/ec2_ds_configs/6500/region: us-east-1
-/scrape_configs/mm_account/ec2_ds_configs/6500/ 
