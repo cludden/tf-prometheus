@@ -2,7 +2,7 @@
 a [terraform](https://terraform.io) module for deploying [prometheus](https://prometheus.io/) on AWS in an autoscaling group
 
 ## Usage
-```terraform
+```hcl
 terraform {}
 
 # define aws provider
