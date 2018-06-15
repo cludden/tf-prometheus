@@ -1,0 +1,19 @@
+{
+  "name": "tf-prometheus",
+  "version": "0.0.0",
+  "description": "a [terraform](https://terraform.io) module for deploying [prometheus](https://prometheus.io/) on AWS in an autoscaling group",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cludden/tf-prometheus.git"
+  },
+  "author": "chris ludden",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cludden/tf-prometheus/issues"
+  },
+  "homepage": "https://github.com/cludden/tf-prometheus#readme"
+}
