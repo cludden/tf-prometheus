@@ -1,8 +1,3 @@
-# define aws provider
-provider "aws" {
-  region = "${var.region}"
-}
-
 # import caller identify information
 data "aws_caller_identity" "current" {}
 
