@@ -1,6 +1,6 @@
 {
   "name": "tf-prometheus",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "a [terraform](https://terraform.io) module for deploying [prometheus](https://prometheus.io/) on AWS in an autoscaling group",
   "main": "index.js",
   "scripts": {
